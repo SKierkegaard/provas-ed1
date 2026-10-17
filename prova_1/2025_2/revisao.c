@@ -88,3 +88,38 @@ int remOcurrStack(Stack *s, void *key, (*cmp)(void *, void *)) {
 
     return occur;
 }
+
+
+int verificaStrings(char *s1, int  n1, char *s2, int n2) {
+    if (s1 == NULL || s2 == NULL || n1 != n2) {
+        return FALSE;
+    }
+
+    Stack *s = stackCreate(n2);
+    if (s == NULL) {
+        return 0;
+    }
+
+    int k = 0;
+    for (int i = 0; i <= n2 + 1; i++) {
+        if (s2[i] == ' ' || s2[i] == '\0') {
+            for (; k <= i; k++) {
+                if (*(char *) stackRemove(s) != s1[k]) {
+                    stackDestroy(s);
+                    return FALSE;
+                }
+            } 
+
+            if (s1[k] != s2[i]) {
+                stackDestroy(s);
+                return FALSE;
+            }
+            k++;
+        } else {
+            stackInsert(s, &s2[i]);
+        }
+    }
+
+    stackDestroy(s);
+    return TRUE;
+}
