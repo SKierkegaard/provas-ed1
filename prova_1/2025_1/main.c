@@ -26,11 +26,11 @@ int inverterOrdemElementosLinhaK(int *v, int n, int m, int l) {
     }
 
     for (int i = 0; i < m; i++) {
-        stackInsert(s, (void *) v[m * (l - 1) + i]);   
+        stackPush(s, (void *) &v[m * (l - 1) + i]);   
     }
 
     for (int i = 0; i < m; i++) {
-        v[m * (l - 1) + i] = (int) stackRemove(s);
+        v[m * (l - 1) + i] = *(int *) stackPop(s);
     }
 
     return TRUE;
@@ -60,7 +60,7 @@ void removePares(Stack *s) {
     }
 
    int w = 0;
-    for (int i = s->top % 2; r <= s->top; r += 2) {
+    for (int r = s->top % 2; r <= s->top; r += 2) {
         s->items[w] = s->items[r];
         w++;
     }
@@ -89,7 +89,7 @@ char *converteString(char *str, int n) {
     for (int i == n - 1; i >= 0; i--) {
         if (str[i] == ' ') {
             for (int j = 0; j < word; j++) {
-                aux[idx] = *(char *) stackRemove(s);
+                aux[idx] = *(char *) stackPop(s);
                 idx++;
             }
             aux[idx] = ' ';
@@ -97,13 +97,13 @@ char *converteString(char *str, int n) {
             word = 0;
     
         } else {
-            stackInsert(s, (void *) &str[i]);
+            stackPush(s, (void *) &str[i]);
             word++;
         }
     }
 
     for (int i = 0; i < word; i++) {
-        aux[idx] = *(char *) stackRemove(s);
+        aux[idx] = *(char *) stackPop(s);
         idx++;
     }
 

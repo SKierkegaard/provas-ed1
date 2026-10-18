@@ -104,7 +104,7 @@ int verificaStrings(char *s1, int  n1, char *s2, int n2) {
     for (int i = 0; i <= n2 + 1; i++) {
         if (s2[i] == ' ' || s2[i] == '\0') {
             for (; k <= i; k++) {
-                if (*(char *) stackRemove(s) != s1[k]) {
+                if (*(char *) stackPop(s) != s1[k]) {
                     stackDestroy(s);
                     return FALSE;
                 }
@@ -116,7 +116,7 @@ int verificaStrings(char *s1, int  n1, char *s2, int n2) {
             }
             k++;
         } else {
-            stackInsert(s, &s2[i]);
+            stackPush(s, &s2[i]);
         }
     }
 
